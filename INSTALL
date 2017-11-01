@@ -1,12 +1,31 @@
+# Contents
+1. [English](#english)
+2. [Português](#português)
+
+## English
+1. [Instalation](#instalation)
+2. [Configuration](#configure)
+3. [Starting](#starting)
+
+## Instalation
 To install you will need to:
+- [PHP 7](http://php.net/docs.php or higher) (5.4 works, but we recomended version 7) installed locally
+- [Composer](https://getcomposer.org/doc/00-intro.md) installed locally
+- SQLite 3.11.0
 
-1) Execute the git clone commands below in 'etc' folder:
+* If you have issues during installing PHP on Debian or other SO, [try this link](https://www.colinodell.com/blog/2015-12/installing-php-7-0-0).
 
-git clone https://github.com/LeaVerou/awesomplete.git
-git clone https://github.com/google/recaptcha.git
-git clone https://github.com/vlucas/phpdotenv.git
+##Configuration
 
-2) Create a file named '.env' outside the archives-world dir (maybe at /root or your homedir - you need to put the choosed dir in "Config phpdotenv" section at index.php) and put the lines below. Edit the vars with the values of your preference or needs. Remember that data are very sensitive and can't be reached by users from webserver.
+### Composer setup
+Install this packages:
+- [Awesomplete](https://packagist.org/packages/net-tools/awesomplete) by Lea Verou;
+- [Recaptcha](https://packagist.org/packages/google/recaptcha) by Google;
+- [PHPdotenv](https://github.com/vlucas/phpdotenv) by Vance Lucas;
+
+### PHPdotenv setup
+
+Create a file named '.env' outside the archives-world dir (maybe at /root or your homedir - you need to put the choosed dir in "Config phpdotenv" section at index.php) and put the lines below. Edit the vars with the values of your preference or needs. Remember that data are very sensitive and can't be reached by users from webserver.
 
 ##
 ## ARCHIVES WORLD MAP CONFIG
@@ -17,8 +36,38 @@ AWM_HTTPS_URL='https://map.arquivista.net'                    # the https of you
 AWM_LOG_PATH='/var/www/archivesworldmap.log'                  # where do you want to keep your logs
 AWM_BCRYPT_SALT='BCRYPT SALT WITH 22 CHARACTERS'              # A 22 characters Salt for generate bcrypt
 
-3) Create a SQLite database with name and path mentioned in AWM_DATABASE_PATH. Use the schema below and dont forget to create at least one user with a Bcrypt password in "hash" field using the salt of AWM_BCRYPT_SALT.
+### SQLite setup
+
+Create a SQLite database with name and path mentioned in AWM_DATABASE_PATH. Use the schema below and dont forget to create at least one user with a Bcrypt password in "hash" field using the salt of AWM_BCRYPT_SALT.
 
 CREATE TABLE "arquivos" ( `id` INTEGER NOT NULL, `latitude` TEXT NOT NULL, `longitude` TEXT NOT NULL, `nome` TEXT NOT NULL, `logradouro` TEXT, `cidade` TEXT NOT NULL, `estado` TEXT, `pais` TEXT NOT NULL, `url` TEXT, `email` TEXT, `status` TEXT DEFAULT 'waiting', `contributor` TEXT, `contributoremail` TEXT, identificador TEXT, imported TEXT, PRIMARY KEY(`id`) )
 
 CREATE TABLE "usuarios" ( `id` INTEGER, `login` TEXT NOT NULL, hash TEXT, PRIMARY KEY(`id`) )
+
+## Starting
+### Contributing
+
+    1. Fork it
+    2. Create your feature branch (git checkout -b my-new-feature)
+    3. Make your changes
+    4. Run the tests, adding new ones for your own code if necessary (phpunit)
+    5. Commit your changes (git commit -am 'Added some feature')
+    6. Push to the branch (git push origin my-new-feature)
+    7. Create new Pull Request
+
+## Português
+1. [Instalando](#instalação)
+2. [Configurando](#configuração)
+3. [Iniciando](#iniciando)
+
+## Instalação
+Você vai precisar instalar localmente:
+- [PHP 7](http://php.net/docs.php) (Funciona com 5.4, mas é recomendável versão 7+)
+- Este tutorial pode ajudar bastante: [Instalando o Apache 2.4 + MySQL 5.7 + PHP 7.1 (LAMP)](https://matheuslima.com.br/instalando-o-apache-2-4-mysql-5-7-php-7-1-lamp/)
+- [Composer](https://getcomposer.org/doc/00-intro.md)
+- SQLite 3.11.0
+
+* Caso tenha alguma dificuldade na instalação do PHP usando Debian ou outro sistema, [confira este link](https://www.colinodell.com/blog/2015-12/installing-php-7-0-0).
+
+### Configurando o Composer
+Este [link](http://desenvolvimentoparaweb.com/php/composer-a-evolucao-php/) pode ajudar bastante.
